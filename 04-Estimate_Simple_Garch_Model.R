@@ -1,7 +1,7 @@
 library(tidyverse)
 library(FinTS)
-library(rugarch)
-library(writexl)
+library(texreg)
+library(fGarch)
 
 graphics.off()
 
@@ -13,8 +13,8 @@ source('fcts/garch_fcts.R')
 # get price data
 df_ibov <- read_rds('data/RAC-GARCH-Data.rds')
 
-my_garch <- fGarch::garchFit(formula = ~arma(0,0)+garch(1,1),
-                 data = df_ibov$ret)
+my_garch <- garchFit(formula = ~arma(0,0)+garch(1,1),
+                     data = df_ibov$ret)
 
 my_garch
 

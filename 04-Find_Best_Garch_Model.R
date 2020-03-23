@@ -1,6 +1,5 @@
 library(tidyverse)
 library(purrr)
-library(cowplot)
 
 graphics.off()
 

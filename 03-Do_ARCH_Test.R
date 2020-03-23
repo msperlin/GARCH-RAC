@@ -1,7 +1,4 @@
-library(simfinR)
-library(furrr)
 library(tidyverse)
-library(moments)
 
 my_d <- dirname(rstudioapi::getActiveDocumentContext()$path)
 setwd(my_d)

@@ -1,5 +1,4 @@
 library(tidyverse)
-library(FinTS)
 library(fGarch)
 
 graphics.off()

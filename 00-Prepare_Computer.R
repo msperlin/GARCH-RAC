@@ -1,8 +1,8 @@
 # This script will install all missing dependencies 
 
 required_pkgs <- c('tidyverse', 'fGarch', 'BatchGetSymbols',
-                   'GetBCBData', 'cowplot', 'purrr', 'GetBCBData',
-                   'FinTS', 'scales')
+                   'GetBCBData', 'cowplot', 'purrr', 
+                   'FinTS', 'scales', 'texreg')
 
 installed_pkgs <- installed.packages()
 
