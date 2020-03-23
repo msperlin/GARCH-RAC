@@ -6,14 +6,16 @@ graphics.off()
 my_d <- dirname(rstudioapi::getActiveDocumentContext()$path)
 setwd(my_d)
 
+set.seed(20200320)
+
 source('fcts/garch_fcts.R')
 
-n_sim <- 1000 # number of simulations
+n_sim <- 5000 # number of simulations
+n_days_ahead <- 9*365
 
 # get price and model data
 df_ibov <- read_rds('data/RAC-GARCH-Data.rds')
 my_garch <- read_rds('data/garch_model.rds')
-
 
 do_sim <- function(n_sim = 1000, n_t = 1000, my_garch, df_ibov) {
   require(tidyverse)
@@ -37,7 +39,7 @@ do_sim <- function(n_sim = 1000, n_t = 1000, my_garch, df_ibov) {
 }
 
 df_sim <- do_sim(n_sim = n_sim, 
-                 n_t = 2500, my_garch, df_ibov = df_ibov)
+                 n_t = n_days_ahead, my_garch, df_ibov = df_ibov)
 
 df_sim 
 

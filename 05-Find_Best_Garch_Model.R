@@ -19,7 +19,7 @@ find_best_arch_model <- function(x, max_global_lag = 5) {
                          arch_lag = 1:max_global_lag,
                          garch_lag = 1:max_global_lag)
   
-  df_grid <- expand_grid(arma_lag = 1:max_global_lag,
+  df_grid <- expand_grid(arma_lag = 0:max_global_lag,
                          garch_lag = 1:max_global_lag)
   
   l_out <- pmap(.l = list(x = rep(list(x), nrow(df_grid)), 

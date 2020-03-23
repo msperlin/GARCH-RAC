@@ -1,8 +1,9 @@
 # GARCH-RAC
 
-Repository for GARCH tutorial paper in RAC.
+This is the repository for the R code associated with the paper "Garch Tutorial in R", submitted to RAC.
 
-# Prerequisites
+
+# Instructions
 
 1) Install [R](https://cloud.r-project.org/)
 
