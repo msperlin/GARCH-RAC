@@ -18,8 +18,9 @@ my_garch <- garchFit(formula = ~arma(0,0)+garch(1,1),
 
 my_garch
 
-texreg::htmlreg(my_garch, file = 'tabs/garch_tab.html', custom.model.names = df_prices$series_name[1])
+texreg::htmlreg(my_garch, file = 'tabs/garch_tab.html', 
+                custom.model.names = df_prices$series_name[1], digits = 3)
 
-texreg::screenreg(my_garch, custom.model.names = df_prices$series_name[1])
+texreg::screenreg(my_garch, custom.model.names = df_prices$series_name[1], digits = 3)
 
 

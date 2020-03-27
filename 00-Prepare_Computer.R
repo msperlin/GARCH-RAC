@@ -1,8 +1,14 @@
 # This script will install all missing dependencies 
+#
+# LINUX users: Install additional libraries: libssl-dev, libxml2-dev, libcurl4-openssl-dev
+#              In terminal: "sudo apt install libssl-dev libxml2-dev libcurl4-openssl-dev"
+
+my_d <- dirname(rstudioapi::getActiveDocumentContext()$path)
+setwd(my_d)
 
 required_pkgs <- c('tidyverse', 'fGarch', 'BatchGetSymbols',
                    'GetBCBData', 'cowplot', 'purrr', 
-                   'FinTS', 'scales', 'texreg')
+                   'FinTS', 'scales', 'texreg', 'writexl')
 
 installed_pkgs <- installed.packages()
 
