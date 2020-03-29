@@ -1,13 +1,12 @@
-# GARCH-RAC
+# Description
 
-This is the repository for R code associated with the paper "Garch Tutorial in R", submitted to RAC in march 2020.
-
+This is the R code associated with paper "Garch Tutorial in R". 
 
 # Instructions
 
-1) Install R (link [here](https://cloud.r-project.org/) )
+1) Install R: https://cloud.r-project.org/
 
-2) Install RStudio (link [here](https://rstudio.com/products/rstudio/download/))
+2) Install RStudio: https://rstudio.com/products/rstudio/download/
 
 3) Run script _00-Prepare_Computer.R_ to install all dependencies of the code (open script file in RStudio and press _control + shift + enter_)
 
@@ -24,4 +23,4 @@ This is the repository for R code associated with the paper "Garch Tutorial in R
 | 03-Do_ARCH_Test.R                | Performs the arch test in the data.                                                                |
 | 04-Estimate_Simple_Garch_Model.R | Estimate an introductory Garch model and present results.                                          |
 | 05-Find_Best_Garch_Model.R       | Finds the best ARMA(ar, ma)-GARCH(p,q) model for the dataset.                                      |
-| 06-Simulate_Garch_Model.R        | Simulates the previous GARCH model and plots paths and probabilities.                              |
+| 06-Simulate_Garch_Model.R        | Simulates the previous GARCH model and plots paths and probabilities                               |

@@ -46,6 +46,7 @@ do_sim <- function(n_sim = 1000, n_t = 1000, my_garch, df_prices) {
 
 find_best_arch_model <- function(x, max_global_lag = 5) {
   
+  require(tidyr)
   
   df_grid <- expand_grid(arma_lag = 1:max_global_lag,
                          ma_lag = 1:max_global_lag,

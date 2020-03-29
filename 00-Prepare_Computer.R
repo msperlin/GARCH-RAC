@@ -7,7 +7,7 @@ my_d <- dirname(rstudioapi::getActiveDocumentContext()$path)
 setwd(my_d)
 
 required_pkgs <- c('tidyverse', 'fGarch', 'BatchGetSymbols',
-                   'GetBCBData', 'cowplot', 'purrr', 
+                   'GetBCBData', 'cowplot', 'purrr', 'tidyr',
                    'FinTS', 'scales', 'texreg', 'writexl')
 
 installed_pkgs <- installed.packages()
@@ -21,4 +21,5 @@ if (length(missing_pkgs) == 0 ) {
   
   message("All packages installed. You are good to go!")
 }
+
 

@@ -8,7 +8,7 @@ setwd(my_d)
 
 ## MAIN OPTIONS
 
-set.seed(20200320) # seed for simulations (20200320 replicates the paper's results)
+set.seed(20200320) # fix seed for simulations (20200320 replicates the paper's results)
 n_sim <- 5000 # number of simulations (increase it at your own risk!! Your computer might freeze..)
 n_days_ahead <- 6*365 # Number of days ahead to simulate
 
