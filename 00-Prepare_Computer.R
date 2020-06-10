@@ -1,7 +1,14 @@
-# This script will install all missing dependencies 
+# This script will install all missing dependencies for the R code related to 
+# "A Garch Tutorial in R"
 #
-# LINUX users: Install additional libraries: libssl-dev, libxml2-dev, libcurl4-openssl-dev
-#              In terminal: "sudo apt install libssl-dev libxml2-dev libcurl4-openssl-dev"
+# LINUX users: 1) Install additional libraries: libssl-dev, libxml2-dev, libcurl4-openssl-dev
+#                 In terminal (control+alt+t): "sudo apt install libssl-dev libxml2-dev libcurl4-openssl-dev"
+#              2) Run this script
+#
+# WINDOWS users: 1) Run this script
+#
+# MAC users: 1) ????
+#
 
 my_d <- dirname(rstudioapi::getActiveDocumentContext()$path)
 setwd(my_d)
