@@ -22,11 +22,11 @@ If you've found an issue within the code, please use [Git issue system](https://
 
 ## Instructions
 
-1) Install R (link [here](https://cloud.r-project.org/) )
+1) Install R ([link](https://cloud.r-project.org/) )
 
-2) Install RStudio (link [here](https://rstudio.com/products/rstudio/download/))
+2) Install RStudio ([link](https://rstudio.com/products/rstudio/download/))
 
-3) Run script _00-Prepare_Computer.R_ to install all dependencies of the code. In RStudio, open script file and press _control + shift + enter_
+3) Run script _00-Prepare_Computer.R_ to install all dependencies of the code. In RStudio, open R script file and press _control + shift + enter_
 
 4) Execute other scripts in root folder in order to reproduce all results from the paper
 
