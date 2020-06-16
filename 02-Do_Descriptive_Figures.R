@@ -1,13 +1,30 @@
+# A Garch Tutorial with R <link_paper_here>
+#
+# This script will import inflation data from the Brazilian Central Bank Database
+# <https://www3.bcb.gov.br/sgspub/localizarseries/localizarSeries.do?method=prepararTelaLocalizarSeries> 
+# and produce Figure 01 of the paper as a png file located at folder fig
+
+# OPTIONS
+n_largest <- 10 # number of largest absolute returns to plot
+
+# END OPTIONS
+
+# load libraries
 library(tidyverse)
 library(cowplot)
 library(GetBCBData)
 
+# close all existing plot windows
 graphics.off()
 
+# change directory
 my_d <- dirname(rstudioapi::getActiveDocumentContext()$path)
 setwd(my_d)
 
-# source scripts
+# make sure folder "fig" exists
+if (!dir.exists('figs')) dir.create('figs')
+
+# source functions 
 source('fcts/garch_fcts.R')
 
 # get price data
@@ -28,6 +45,7 @@ ret_inflation_year = (1+total_inflation)^(1/n_years) - 1
 real_ret_ibov <- (1+total_ibov_ret)/(1+total_inflation) - 1
 real_ret_ibov_year <- (1+ret_ibov_year)/(1+ret_inflation_year) - 1
 
+# create first plot
 p1 <- ggplot(df_prices, aes(x = ref.date, y = price.adjusted)) + 
   geom_line() + 
   labs(title = paste0('Prices of ', series_name),
@@ -42,13 +60,12 @@ p1 <- ggplot(df_prices, aes(x = ref.date, y = price.adjusted)) +
        caption = 'Data from Yahoo Finance') + 
   theme_bw() 
 
-
-n_largest <- 10
-
+# calculate largest absolute price variations
 largest_tab <- df_prices %>%
   group_by(ticker) %>%
   top_n(abs(log_ret), n = n_largest)
 
+# create second plot
 p2 <- ggplot(df_prices, 
              aes(x = ref.date, y = log_ret)) + 
   geom_line() + 
@@ -65,7 +82,9 @@ p2 <- ggplot(df_prices,
   labs(size = 'Absolute Price Variation') + 
   scale_color_brewer(palette = 'BrBG')
 
+# bind plots together
 p <- plot_grid(p1, p2, nrow = 2, labels = 'AUTO')
 
+# show and save
 x11() ; p ; ggsave(paste0('figs/01_', series_name, '_prices_returns.png'), p)
 

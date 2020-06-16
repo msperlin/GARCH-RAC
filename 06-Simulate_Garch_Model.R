@@ -1,3 +1,17 @@
+# A Garch Tutorial with R <link_paper_here>
+#
+# This script will use the best garch model from previous script and simulate
+# many return series into the future. After the simulations, the code calculates 
+# probabilities for the simulated paths to reach the maximum value of index Ibovespa.
+
+## OPTIONS
+
+set.seed(20200320) # fix seed for simulations (20200320 replicates the paper's results)
+n_sim <- 5000 # number of simulations (5000 in paper, increase it at your own risk!!)
+n_days_ahead <- 6*365 # Number of days ahead to simulate (6*365 in paper)
+
+## END OPTIONS
+
 library(tidyverse)
 library(fGarch)
 
@@ -5,14 +19,6 @@ graphics.off()
 
 my_d <- dirname(rstudioapi::getActiveDocumentContext()$path)
 setwd(my_d)
-
-## MAIN OPTIONS
-
-set.seed(20200320) # fix seed for simulations (20200320 replicates the paper's results)
-n_sim <- 5000 # number of simulations (increase it at your own risk!! Your computer might freeze..)
-n_days_ahead <- 6*365 # Number of days ahead to simulate
-
-## END OPTIONS
 
 # get price and model data
 df_prices <- read_rds('data/RAC-GARCH-Data.rds')
@@ -23,7 +29,9 @@ series_name <- df_prices$series_name[1]
 source('fcts/garch_fcts.R')
 
 df_sim <- do_sim(n_sim = n_sim, 
-                 n_t = n_days_ahead, my_garch, df_prices = df_prices)
+                 n_t = n_days_ahead, 
+                 my_garch, 
+                 df_prices = df_prices)
 
 df_sim 
 

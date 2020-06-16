@@ -1,6 +1,6 @@
 # Description
 
-This is the R code associated with paper "Garch Tutorial in R". 
+This is the R code associated with paper "Garch Tutorial in R", avaliable at <link_here>. 
 
 # Instructions
 

@@ -1,3 +1,14 @@
+# A Garch Tutorial with R <link_paper_here>
+#
+# This script will estimate several garch models and find the best using the BIC
+# criteria. A plot with the results, Figure 02 in the paper, is saved in a png file. 
+
+## MAIN OPTIONS
+
+max_global_lag <- 5 # max lag in all estimations
+
+## END OPTIONS
+
 library(tidyverse)
 library(purrr)
 
@@ -7,12 +18,6 @@ my_d <- dirname(rstudioapi::getActiveDocumentContext()$path)
 setwd(my_d)
 
 source('fcts/garch_fcts.R')
-
-## MAIN OPTIONS
-
-max_global_lag <- 5
-
-## END OPTIONS
 
 # get price data
 df_prices <- read_rds('data/RAC-GARCH-Data.rds')
