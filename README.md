@@ -15,26 +15,31 @@ This is the repository for R code associated with the paper "Garch Tutorial in R
 | 06-Simulate_Garch_Model.R        | Simulates the previous GARCH model and plots paths and probabilities.                              |
 
 
+## Instructions
+
+1) Install latest version of R ([link](https://cloud.r-project.org/) )
+
+2) Install latest version of RStudio ([link](https://rstudio.com/products/rstudio/download/))
+
+3) Download [zip file](https://github.com/msperlin/GARCH-RAC/archive/master.zip) from this repository.
+
+4) Unzip the content of zip file in a personal folder
+
+5) Run first script _00-Prepare_Computer.R_ to install all dependencies of the code. For that, in RStudio, open R script file and press _control + shift + enter_
+
+6) Execute other scripts in root folder in order to reproduce all results from the paper
+
+If these steps don't work for you, please [let us know](https://github.com/msperlin/GARCH-RAC/issues) by reporting OS (windows/linux/mac), R version and error code (if any). 
+
+
 ## Issues and bugs
 
 If you've found an issue within the code, please use [Git issue system](https://github.com/msperlin/GARCH-RAC/issues). That way everyone will be able to see the history of issues and corrections.
 
+### Tested platforms:
 
-## Instructions
-
-1) Install R ([link](https://cloud.r-project.org/) )
-
-2) Install RStudio ([link](https://rstudio.com/products/rstudio/download/))
-
-3) Run script _00-Prepare_Computer.R_ to install all dependencies of the code. In RStudio, open R script file and press _control + shift + enter_
-
-4) Execute other scripts in root folder in order to reproduce all results from the paper
-
-If those steps don't work for you, please [let me know](https://github.com/msperlin/GARCH-RAC/issues) by reporting OS (windows/linux/mac), R version and error code (if any). 
-
-## Tested platforms:
-
-- Windows 10
-- Linux Mint 20.0
-- Ubuntu 20.0
+- [Windows 10](https://www.microsoft.com/pt-br/software-download/windows10ISO)
+- [Linux Mint 20](https://linuxmint.com/release.php?id=38)
+- [Ubuntu 20.04](https://ubuntu.com/download/desktop/thank-you?version=20.04&architecture=amd64)
+- [RStudio Cloud](https://rstudio.cloud/)
 
