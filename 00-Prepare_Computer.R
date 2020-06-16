@@ -1,25 +1,25 @@
-# A Garch Tutorial with R
+# A Garch Tutorial with R - Prepare computer
+# Paper at <link_paper_here>
 #
 # This script will install all missing dependencies for the R code related to article
-# "A Garch Tutorial in R" <link-to-paper>. First, make sure you got the required 
-# software: 
+# "A Garch Tutorial in R" <link-to-paper>. First, make sure you got the right software: 
 #
 # 1) [required] Install R <https://www.r-project.org/>
 # 2) [optional] Install RStudio <https://rstudio.com/products/rstudio/download/>
 # 
-# Preferably, you should execute all scripts in RStudio. If you use other IDE, 
+# Preferably, you should execute all scripts in RStudio. If you use other IDE (or none), 
 # make sure to change the path for setwd() in all scripts.
 #
 # LINUX users: 1) Install additional libraries: libssl-dev, libxml2-dev, libcurl4-openssl-dev
 #                 In terminal (control+alt+t): "sudo apt install libssl-dev libxml2-dev libcurl4-openssl-dev"
 #              2) Execute this script
 #
-# WINDOWS users: 1) Execute this script ???
+# WINDOWS users: 1) Execute this script
 #
-# MAC users: 1) ????
+# MAC users: 1) Execute this script
 
 # required packages
-required_pkgs <- c('tidyverse', 'fGarch', 'BatchGetSymbols',
+required_pkgs <- c('tidyverse', 'rugarch', 'BatchGetSymbols',
                    'GetBCBData', 'cowplot', 'purrr', 'tidyr',
                    'FinTS', 'scales', 'texreg', 'writexl')
 

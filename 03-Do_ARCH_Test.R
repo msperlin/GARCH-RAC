@@ -1,4 +1,5 @@
-# A Garch Tutorial with R <link_paper_here>
+# A Garch Tutorial with R - Perform ARCH test in series of returns
+# Paper at <link_paper_here>
 #
 # This script will test for arch effect and save results in excel file
 

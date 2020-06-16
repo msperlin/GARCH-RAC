@@ -1,4 +1,5 @@
-# A Garch Tutorial with R <link_here>
+# A Garch Tutorial with R - Get Index data
+# Paper at <link_paper_here>
 #
 # This script will import price data for market index Ibovespa from Yahoo Finance.
 # 
@@ -11,7 +12,7 @@ first_date <- '2000-01-01' # first date in sample
 last_date <- '2020-03-20' # set Sys.Date() for current date 
 my_ticker <- '^BVSP' # Ibovespa ticker (fell free to change to any 
                      # other from YFinance: ^GSCP, ^FTSE, ITSA3.SA
-                     # check https://finance.yahoo.com/ for more tickers
+                     # head over to https://finance.yahoo.com/ for more tickers
 series_name <- 'Ibovespa' # Name of index/stock that will show up in all plots
 
 ## END OPTIONS

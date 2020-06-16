@@ -1,4 +1,5 @@
-# A Garch Tutorial with R <link_paper_here>
+# A Garch Tutorial with R - Descriptive Stats and Figures
+# Paper at <link_paper_here>
 #
 # This script will import inflation data from the Brazilian Central Bank Database
 # <https://www3.bcb.gov.br/sgspub/localizarseries/localizarSeries.do?method=prepararTelaLocalizarSeries> 
