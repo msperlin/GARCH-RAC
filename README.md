@@ -30,6 +30,11 @@ If you've found an issue within the code, please use [Git issue system](https://
 
 4) Execute other scripts in root folder in order to reproduce all results from the paper
 
-If those steps don't work for you, please [let me know](https://github.com/msperlin/GARCH-RAC/issues) by reporting OS (windows/linux/mac), R version and error code. 
+If those steps don't work for you, please [let me know](https://github.com/msperlin/GARCH-RAC/issues) by reporting OS (windows/linux/mac), R version and error code (if any). 
 
+## Tested platforms:
+
+- Windows 10
+- Linux Mint 20.0
+- Ubuntu 20.0
 
