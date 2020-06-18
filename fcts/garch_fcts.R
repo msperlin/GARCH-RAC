@@ -1,8 +1,27 @@
+#' Returns a percentage as character vector
+#'
+#' @param x A numeric
+#'
+#' @return A string with percentages
+#' @export
+#'
+#' @examples
+#' my_perc(0.1)
 my_perc <- function(x) {
   require(scales)
   x <- scales::percent(x, accuracy = 0.01)
 }
 
+#' Performan Arch text in a numerical vector
+#'
+#' @param x Numerical vector, such as returns
+#' @param max_lag Maximum lag to use in arch test
+#'
+#' @return A dataframe with results
+#' @export
+#'
+#' @examples
+#' do_arch_test(runif(100))
 do_arch_test <- function(x, max_lag = 5) {
   require(FinTS)
   require(tidyverse)
@@ -20,6 +39,17 @@ do_arch_test <- function(x, max_lag = 5) {
   return(tab_out)
 }
 
+#' Run Garch simulation
+#'
+#' @param n_sim Number of simulations
+#' @param n_t Number of time periods in each simulation
+#' @param my_garch A garch model estimated with rugarch
+#' @param df_prices A dataframe with prices with columns ref.date and price.adjusted
+#'
+#' @return A dataframe with simulated prices and returns
+#' @export
+#'
+#' @examples
 do_sim <- function(n_sim = 1000, n_t = 1000, my_garch, df_prices) {
   require(tidyverse)
   require(rugarch)
@@ -53,27 +83,46 @@ do_sim <- function(n_sim = 1000, n_t = 1000, my_garch, df_prices) {
   
 }
 
-find_best_arch_model <- function(x, type_models, max_global_lag = 5) {
+#' Finds best ARMA-GARCH model 
+#'
+#' @param x A (numeric) vector of returns
+#' @param type_models Type of models (see rugarch::rugarchspec)
+#' @param dist_to_use Type of distributions to use (see rugarch::rugarchspec)
+#' @param max_lag_AR Maximum lag for AR parameter
+#' @param max_lag_MA Maximum lag for MA parameter
+#' @param max_lag_ARCH Maximum lag for ARCH parameter
+#' @param max_lag_GARCH Maximum lag for GARCH parameter
+#'
+#' @return A list with results
+#' @export
+#'
+#' @examples
+find_best_arch_model <- function(x, 
+                                 type_models, 
+                                 dist_to_use,
+                                 max_lag_AR,
+                                 max_lag_MA,
+                                 max_lag_ARCH,
+                                 max_lag_GARCH) {
   
   require(tidyr)
   
   df_grid <- expand_grid(type_models = type_models,
-                         arma_lag = 1:max_global_lag,
-                         ma_lag = 1:max_global_lag,
-                         arch_lag = 1:max_global_lag,
-                         garch_lag = 1:max_global_lag)
+                         dist_to_use = dist_to_use,
+                         arma_lag = 0:max_lag_AR,
+                         ma_lag = 0:max_lag_MA,
+                         arch_lag = 1:max_lag_ARCH,
+                         garch_lag = 1:max_lag_GARCH)
   
-  df_grid <- expand_grid(type_models = type_models,
-                         arma_lag = 0:max_global_lag,
-                         garch_lag = 1:max_global_lag)
   
   l_out <- pmap(.l = list(x = rep(list(x), nrow(df_grid)), 
                           type_model = df_grid$type_models,
+                          type_dist = df_grid$dist_to_use,
                           lag_ar = df_grid$arma_lag,
-                          lag_ma = df_grid$arma_lag,
-                          lag_arch = df_grid$garch_lag,
+                          lag_ma = df_grid$ma_lag,
+                          lag_arch = df_grid$arch_lag,
                           lag_garch  = df_grid$garch_lag),
-                do_single_garch_rugarch)
+                do_single_garch)
   
   tab_out <- bind_rows(l_out)
   
@@ -92,45 +141,40 @@ find_best_arch_model <- function(x, type_models, max_global_lag = 5) {
   return(l_out)
 }
 
-do_single_garch_fGarch <- function(x, lag_ar, lag_ma, lag_arch, lag_garch) {
-  require(fGarch)
-  
-  my_formula <- formula(paste0('~arma(', lag_ar, ',',lag_ma,')', ' + ',
-                               'garch(', lag_arch, ',', lag_garch, ')'))
-  
-  message('Estimating ', as.character(my_formula)[2])
-  
-  capture.output({
-    my_garch <- fGarch::garchFit(formula = my_formula,
-                                 data = x, trace = FALSE)
-    
-    my_summary <- summary(my_garch)
-  }, file = NULL)
-  
-  
-  est_tab <- tibble(lag_ar, 
-                    lag_ma,
-                    lag_arch,
-                    lag_garch,
-                    AIC = my_garch@fit$ics['AIC'],
-                    BIC = my_garch@fit$ics['BIC'],
-                    model_name = paste0('ARMA(', lag_ar, ',', lag_ma, ')+',
-                                        'GARCH(', lag_arch, ',', lag_garch, ')') )
-  
-  return(est_tab)
-}
 
-do_single_garch_rugarch <- function(x, type_model, lag_ar, lag_ma, lag_arch, lag_garch) {
+#' Estimates a single Garch model
+#'
+#' @param x Numeric vector (tipicaly log returns)
+#' @param type_model Type of model (see rugarch::rugarchspec)
+#' @param type_dist Type of distribution (see rugarch::rugarchspec)
+#' @param lag_ar Lag at AR parameter
+#' @param lag_ma Lag at MA parameter
+#' @param lag_arch Lag at ARCH parameter
+#' @param lag_garch Lag at GARCH parameter
+#'
+#' @return A dataframe with estimation results
+#' @export
+#'
+#' @examples
+do_single_garch <- function(x, 
+                            type_model, 
+                            type_dist, 
+                            lag_ar, 
+                            lag_ma, 
+                            lag_arch, 
+                            lag_garch) {
   require(rugarch)
   
   
   spec = ugarchspec(variance.model = list(model =  type_model, 
                                           garchOrder = c(lag_arch, lag_garch)),
                     mean.model = list(armaOrder = c(lag_ar, lag_ma)),
-                    distribution = 'std')
+                    distribution = type_dist)
   
   message('Estimating ARMA(',lag_ar, ',', lag_ma,')-',
-          type_model, '(', lag_arch, ',', lag_garch, ')', appendLF = FALSE)
+          type_model, '(', lag_arch, ',', lag_garch, ')', 
+          ' dist = ', type_dist,
+          appendLF = FALSE)
   
   try({
     my_rugarch <- list()
@@ -139,24 +183,16 @@ do_single_garch_rugarch <- function(x, type_model, lag_ar, lag_ma, lag_arch, lag
   
   if (!is.null(coef(my_rugarch))) {
     message('\tDone')
+    
+    AIC <- rugarch::infocriteria(my_rugarch)[1]
+    BIC <- rugarch::infocriteria(my_rugarch)[2]
   } else {
     message('\tEstimation failed..')
     
-    est_tab <- tibble(lag_ar = NA, 
-                      lag_ma = NA,
-                      lag_arch = NA,
-                      lag_garch = NA,
-                      AIC =  NA,
-                      BIC = NA,
-                      type_model = type_model,
-                      model_name = paste0('ARMA(', lag_ar, ',', lag_ma, ')+',
-                                          type_model, '(', lag_arch, ',', lag_garch, ')') )
-    return(est_tab)
+    AIC <- NA
+    BIC <- NA
   }
-  
-  AIC <- rugarch::infocriteria(my_rugarch)[1]
-  BIC <- rugarch::infocriteria(my_rugarch)[2]
-  
+
   est_tab <- tibble(lag_ar, 
                     lag_ma,
                     lag_arch,
@@ -164,14 +200,29 @@ do_single_garch_rugarch <- function(x, type_model, lag_ar, lag_ma, lag_arch, lag
                     AIC =  AIC,
                     BIC = BIC,
                     type_model = type_model,
+                    type_dist,
                     model_name = paste0('ARMA(', lag_ar, ',', lag_ma, ')+',
-                                        type_model, '(', lag_arch, ',', lag_garch, ')') )
+                                        type_model, '(', lag_arch, ',', lag_garch, ') ',
+                                        type_dist) ) 
   
   return(est_tab)
 }
 
-# Reformating rugarch output to texreg
-# https://stackoverflow.com/questions/57312645/how-to-export-garch-output-to-latex
+
+#' Reformats rugarch output to texreg
+#' 
+#' <https://stackoverflow.com/questions/57312645/how-to-export-garch-output-to-latex>   
+#'
+#' @param fit Rugarch model object
+#' @param include.rsquared Should include rquared?
+#' @param include.loglike Should include loglike?
+#' @param include.aic  Should include AIC?
+#' @param include.bic Should include BIC?
+#'
+#' @return A texreg friendly object
+#' @export
+#'
+#' @examples
 extract.rugarch <- function(fit, 
                             include.rsquared = TRUE, 
                             include.loglike = TRUE, 

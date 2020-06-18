@@ -18,6 +18,9 @@ setwd(my_d)
 
 source('fcts/garch_fcts.R')
 
+# create directory
+if (!dir.exists(dirname(xlsx_file))) dir.create(dirname(xlsx_file))
+
 # get price data
 df_prices <- read_rds('data/RAC-GARCH-Data.rds')
 

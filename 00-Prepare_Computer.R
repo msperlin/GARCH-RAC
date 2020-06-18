@@ -17,9 +17,13 @@
 # WINDOWS users: 1) Execute this script
 #
 # MAC users: 1) Execute this script
+# 
+# RStudio Cloud (https://rstudio.cloud/): 
+#     1) Execute this script
+#     2) Remove all "x11()" calls in the code   
 
 # required packages
-required_pkgs <- c('tidyverse', 'rugarch', 'BatchGetSymbols',
+required_pkgs <- c('tidyverse', 'ggtext', 'rugarch', 'BatchGetSymbols',
                    'GetBCBData', 'cowplot', 'purrr', 'tidyr',
                    'FinTS', 'scales', 'texreg', 'writexl')
 

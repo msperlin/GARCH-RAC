@@ -8,8 +8,8 @@
 
 ## MAIN OPTIONS (fell free to edit it)
 
-first_date <- '2000-01-01' # first date in sample
-last_date <- '2020-03-20' # set Sys.Date() for current date 
+first_date <- '2000-01-01' # first date in sample ("2000-01-01" in paper)
+last_date <- '2020-06-20' # set Sys.Date() for current date ("2020-06-20" in paper)
 my_ticker <- '^BVSP' # Ibovespa ticker (fell free to change to any 
                      # other from YFinance: ^GSCP, ^FTSE, ITSA3.SA
                      # head over to https://finance.yahoo.com/ for more tickers
