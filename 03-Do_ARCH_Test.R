@@ -11,7 +11,8 @@ xlsx_file <- 'tabs/Arch-test.xlsx'
 ## END OPTIONS
 
 library(tidyverse)
-library(writexl)
+library(knitr)
+library(kableExtra)
 
 my_d <- dirname(rstudioapi::getActiveDocumentContext()$path)
 setwd(my_d)
@@ -29,5 +30,19 @@ tab_out <- do_arch_test(x = df_prices$log_ret, max_lag = max_lag)
 
 tab_out
 
-# save data in xlsx
-write_xlsx(x = tab_out, path = xlsx_file)
+# remove attributes of table so it can be correctly parsed in html
+tab_out <- as.data.frame(
+  lapply(tab_out, function(x) { attributes(x) <- NULL; x })
+)
+str(tab_out)
+
+rownames(tab_out) <- NULL
+
+# save table in html
+my_tbl <- knitr::kable(tab_out, format = 'html' ) %>%
+  kable_styling(bootstrap_options = c("striped"), 
+                full_width = FALSE ) 
+
+my_tbl
+
+cat(my_tbl, file ='tabs/tab03-Arch_Test.html')  

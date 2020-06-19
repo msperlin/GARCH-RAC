@@ -87,7 +87,7 @@ p1 <- ggplot(df_long %>%
        color = 'Type of Model') + 
   theme(legend.position = "right")
 
-x11()  ; p1 ; ggsave('figs/02-best-garch.png')
+x11()  ; p1 ; ggsave('figs/fig03_best_garch.png')
 
 
 # estimate best garch model by BIC (used in next section)

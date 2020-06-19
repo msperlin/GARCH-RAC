@@ -267,6 +267,14 @@ extract.rugarch <- function(fit,
     gof.decimal <- c(gof.decimal, TRUE)
   }
   
+  # include distribution and type variance
+# browser()
+#   variance_model <- fit@model$modeldesc$vmodel
+#   type_dist <- fit@model$modeldesc$distribution
+#   gof <- c(gof, variance_model, type_dist)
+#   gof.names <- c(gof.names, "Variance Model", 'Distribution')
+#   gof.decimal <- c(gof.decimal, TRUE, TRUE)
+  
   # create texreg object:
   tr <- createTexreg(
     coef.names = coefnames, 

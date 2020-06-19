@@ -40,6 +40,11 @@ df_sim <- do_sim(n_sim = n_sim,
 
 glimpse(df_sim )
 
+# calculate probabilities of reaching peak value
+tab_prob <- df_sim %>%
+  group_by(ref_date) %>%
+  summarise(prob = mean(sim_price > max(df_prices$price.adjusted)))
+
 n_years_back <- 4
 df_prices_temp <- df_prices %>%
   dplyr::filter(ref.date > max(ref.date) - n_years_back*365)
@@ -72,11 +77,7 @@ p1 <- ggplot() +
 
 
 # plot graphics
-x11(); p1 ; ggsave(paste0('figs/03-', series_name, '-Simulation.png'))
-
-tab_prob <- df_sim %>%
-  group_by(ref_date) %>%
-  summarise(prob = mean(sim_price > max(df_prices_temp$price.adjusted)))
+x11(); p1 ; ggsave(paste0('figs/fig04_', series_name, '_price_simulation.png'))
 
 my_idx_date <- first(which(tab_prob$prob > 0.5))
 df_date <- tibble(idx = c(first(which(tab_prob$prob > 0.001)),
@@ -122,4 +123,4 @@ p2 <- ggplot(tab_prob, aes(x = ref_date, y = prob) ) +
                hjust = 0) + 
   theme_bw()
 
-x11(); p2 ; ggsave(paste0('figs/04-', series_name, '-Probs.png'))
+x11(); p2 ; ggsave(paste0('figs/fig05_', series_name, '_prob_reaching_peak.png'))

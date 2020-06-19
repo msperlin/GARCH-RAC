@@ -87,5 +87,5 @@ p2 <- ggplot(df_prices,
 p <- plot_grid(p1, p2, nrow = 2, labels = 'AUTO')
 
 # show and save
-x11() ; p ; ggsave(paste0('figs/01_', series_name, '_prices_returns.png'), p)
+x11() ; p ; ggsave(paste0('figs/fig02_', series_name, '_prices_returns.png'), p)
 

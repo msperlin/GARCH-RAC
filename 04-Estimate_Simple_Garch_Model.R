@@ -5,11 +5,12 @@
 # in a html file
 
 # OPTIONS
-ar_lag <- 1 # lag used for ar term in mean equation
-ma_lag <- 0 # lag used for ma term in mean equation
-arch_lag <- 1 # lag in arch effect
-garch_lag <- 1 # lag in garch effect
+ar_lag <- 0 # lag used for ar term in mean equation (0 in paper)
+ma_lag <- 0 # lag used for ma term in mean equation (0 in paper)
+arch_lag <- 1 # lag in arch effect (1 in paper)
+garch_lag <- 1 # lag in garch effect (1 in paper)
 models_to_estimate <- c('sGARCH', 'eGARCH', 'gjrGARCH') # see rugarch manual for more
+distribution_to_estimate <- 'snorm' # distribution used in all models
 my_html_file <- 'tabs/garch_tab.html' # where to save html file?
 
 # END OPTIONS
@@ -57,15 +58,23 @@ if (!dir.exists('tabs')) dir.create('tabs')
 # reformat models for texreg
 l_models <- map(l_models, extract.rugarch, include.rsquared = FALSE)
 
+# write custom row
+custom_row <- list('Variance Model' = models_to_estimate,
+                   'Distribution' = rep(distribution_to_estimate, 
+                                        length(l_models)))
+custom_names <- paste0('Model ', 1:length(l_models))
+
 # save to html
 htmlreg(l_models, 
-        file = my_html_file,
-        custom.model.names = models_to_estimate, 
+        file = my_html_file, 
+        custom.gof.rows = custom_row,
+        custom.model.names = custom_names, 
         digits = 3)
 
 # print to screen
 screenreg(l_models,
-          custom.model.names = models_to_estimate, 
+          custom.gof.rows = custom_row,
+          custom.model.names = custom_names, 
           digits = 3)
 
 

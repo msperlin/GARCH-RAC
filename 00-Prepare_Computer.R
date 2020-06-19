@@ -25,7 +25,7 @@
 # required packages
 required_pkgs <- c('tidyverse', 'ggtext', 'rugarch', 'BatchGetSymbols',
                    'GetBCBData', 'cowplot', 'purrr', 'tidyr',
-                   'FinTS', 'scales', 'texreg', 'writexl')
+                   'FinTS', 'scales', 'texreg', 'knitr', 'kableExtra')
 
 # finds installed pkgs from R session
 installed_pkgs <- installed.packages()
