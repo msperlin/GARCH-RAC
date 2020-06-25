@@ -1,8 +1,8 @@
 # A Garch Tutorial with R - Estimate simple garch model
 # Paper at <link_paper_here>
 #
-# This script will estimate a simple garch model and save estimation results
-# in a html file
+# This script will estimate a simple garch model, with three different distributions,
+# and save estimation results in a .html file
 
 # OPTIONS
 ar_lag <- 0 # lag used for ar term in mean equation (0 in paper)
@@ -20,7 +20,7 @@ library(FinTS)
 library(texreg)
 library(rugarch)
 
-# close all openned windows
+# close all opened windows
 graphics.off()
 
 # change working directory
@@ -30,19 +30,35 @@ setwd(my_d)
 # source functions
 source('fcts/garch_fcts.R')
 
+# get all combinations of models
+df_grid <- expand_grid(ar_lag,
+                       ma_lag,
+                       arch_lag,
+                       garch_lag,
+                       models_to_estimate,
+                       distribution_to_estimate)
+
 # get price data
 df_prices <- read_rds('data/RAC-GARCH-Data.rds')
 
-estimate_garch <- function(type_model) {
+estimate_garch <- function(ar_lag,
+                           ma_lag,
+                           arch_lag,
+                           garch_lag,
+                           models_to_estimate,
+                           distribution_to_estimate) {
   
-  message('Estimating ', type_model)
+  message('Estimating ARMA(',ar_lag,',', ma_lag, ')', '-',
+          models_to_estimate, '(', arch_lag, ',', garch_lag, ')', '-',
+          'dist = ', distribution_to_estimate)
   
   # estimate model
-  my_spec <- ugarchspec(variance.model = list(model = type_model,
+  my_spec <- ugarchspec(variance.model = list(model = models_to_estimate,
                                               garchOrder = c(arch_lag, 
                                                              garch_lag)),
                         mean.model = list(armaOrder = c(ar_lag,
-                                                        ma_lag)))
+                                                        ma_lag)), 
+                        distribution.model = distribution_to_estimate)
   
   my_garch <- ugarchfit(spec = my_spec, data = df_prices$log_ret)
   
@@ -50,7 +66,8 @@ estimate_garch <- function(type_model) {
 }
 
 # estimate all models
-l_models <- map(.x = models_to_estimate, .f = estimate_garch)
+l_args <- as.list(df_grid)
+l_models <- pmap(.l = l_args, .f = estimate_garch)
 
 # make sure dir "tabs" exists
 if (!dir.exists('tabs')) dir.create('tabs')
@@ -59,9 +76,8 @@ if (!dir.exists('tabs')) dir.create('tabs')
 l_models <- map(l_models, extract.rugarch, include.rsquared = FALSE)
 
 # write custom row
-custom_row <- list('Variance Model' = models_to_estimate,
-                   'Distribution' = rep(distribution_to_estimate, 
-                                        length(l_models)))
+custom_row <- list('Variance Model' = df_grid$models_to_estimate,
+                   'Distribution' = df_grid$distribution_to_estimate)
 custom_names <- paste0('Model ', 1:length(l_models))
 
 # save to html

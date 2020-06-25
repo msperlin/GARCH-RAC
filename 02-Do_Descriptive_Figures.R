@@ -1,9 +1,11 @@
-# A Garch Tutorial with R - Descriptive Stats and Figures
+# A Garch Tutorial with R - Create Descriptive Figure
 # Paper at <link_paper_here>
 #
-# This script will import inflation data from the Brazilian Central Bank Database
+# This script will use the financial data from previous script and, additionally, 
+# import inflation data from the Brazilian Central Bank Database
 # <https://www3.bcb.gov.br/sgspub/localizarseries/localizarSeries.do?method=prepararTelaLocalizarSeries> 
-# and produce Figure 01 of the paper as a png file located at folder fig
+# , producing Figure 01 at the end of its execution
+
 
 # OPTIONS
 n_largest <- 10 # number of largest absolute returns to plot
@@ -70,11 +72,11 @@ largest_tab <- df_prices %>%
 p2 <- ggplot(df_prices, 
              aes(x = ref.date, y = log_ret)) + 
   geom_line() + 
-  labs(title = paste0(series_name, ' - Adjusted Daily Returns and Largest Absolute Returns'),
+  labs(title = paste0('Adjusted Daily Log Returns of ', series_name),
        subtitle = paste0('Red circles represent the largest ', n_largest, 
                          ' absolute price variations in the sample'),
        x = '',
-       y = 'Ajusted Returns',
+       y = 'Ajusted Log Returns',
        caption = 'Data from Yahoo Finance') + 
   theme_bw() + 
   geom_point(data = largest_tab, aes(x = ref.date, y = log_ret), 

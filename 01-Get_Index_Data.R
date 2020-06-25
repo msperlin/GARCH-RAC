@@ -1,7 +1,7 @@
-# A Garch Tutorial with R - Get Index data
+# A Garch Tutorial with R - Get Index data from Yahoo Finance
 # Paper at <link_paper_here>
 #
-# This script will import price data for market index Ibovespa from Yahoo Finance.
+# This script will import price data for market index Ibovespa (or any other) from Yahoo Finance.
 # 
 # The resulting dataset is serialized (saved) in a rds file named data/RAC-GARCH-Data.rds,
 # to be used in the next step.
@@ -9,7 +9,7 @@
 ## MAIN OPTIONS (fell free to edit it)
 
 first_date <- '2000-01-01' # first date in sample ("2000-01-01" in paper)
-last_date <- '2020-06-01' # set Sys.Date() for current date ("2020-06-01" in paper)
+last_date <- '2020-06-15' # set Sys.Date() for current date ("2020-06-01" in paper)
 my_ticker <- '^BVSP' # Ibovespa ticker (fell free to change to any 
                      # other from YFinance: ^GSCP, ^FTSE, ITSA3.SA
                      # head over to https://finance.yahoo.com/ for more tickers

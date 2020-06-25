@@ -7,11 +7,11 @@
 
 ## OPTIONS
 
-set.seed(20200320) # fix seed for simulations (20200320 replicates the paper's results)
+set.seed(20200315) # fix seed for simulations (20200315 replicates the paper's results)
 n_sim <- 5000 # number of simulations (5000 was used in paper,
 # be aware that this code is memory intensive and might freeze your computer. 
 # Increase n_sim at your own risk!!
-n_days_ahead <- 6*365 # Number of days ahead to simulate (6*365 in paper)
+n_days_ahead <- 15*365 # Number of days ahead to simulate (10*365 in paper)
 
 ## END OPTIONS
 
@@ -82,7 +82,8 @@ x11(); p1 ; ggsave(paste0('figs/fig04_', series_name, '_price_simulation.png'))
 my_idx_date <- first(which(tab_prob$prob > 0.5))
 df_date <- tibble(idx = c(first(which(tab_prob$prob > 0.001)),
                           first(which(tab_prob$prob > 0.5)),
-                          first(which(tab_prob$prob > 0.9))),
+                          first(which(tab_prob$prob > 0.75)),
+                          first(which(tab_prob$prob > 0.95))),
                   ref_date = tab_prob$ref_date[idx],
                   prob = tab_prob$prob[idx],
                   my_text = paste0(format(ref_date, '%d/%m/%Y'),
@@ -91,12 +92,12 @@ df_date <- tibble(idx = c(first(which(tab_prob$prob > 0.001)),
 df_textbox <- tibble(ref_date = df_date$ref_date[2],
                      prob = 0.25,
                      label = paste0('According to the estimated _', my_garch_name, '_ model, ', 
-                                    'asset **', series_name, '** will likely reach ',
+                                    'the chances of asset **', series_name, '** to reach ',
                                     'its historical peak value of ', 
                                     format(max(df_prices$price.adjusted), 
                                            big.mark = '.',
                                            decimal.mark = ','),
-                                    ' at ', format(ref_date, '%d/%m/%Y'), '.') )
+                                    ' are higher than 50% at ', format(ref_date, '%d/%m/%Y'), '.') )
 
 p2 <- ggplot(tab_prob, aes(x = ref_date, y = prob) ) + 
   geom_line(size = 2) + 
