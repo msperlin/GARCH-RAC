@@ -16,6 +16,7 @@ n_largest <- 10 # number of largest absolute returns to plot
 library(tidyverse)
 library(cowplot)
 library(GetBCBData)
+library(forecast)
 
 # close all existing plot windows
 graphics.off()
@@ -52,10 +53,10 @@ real_ret_ibov_year <- (1+ret_ibov_year)/(1+ret_inflation_year) - 1
 p1 <- ggplot(df_prices, aes(x = ref.date, y = price.adjusted)) + 
   geom_line() + 
   labs(title = paste0('Prices of ', series_name),
-       subtitle = paste0('Total nominal return equals to ', 
+       subtitle = paste0('Total nominal arithmetic return equals to ', 
                          my_perc(total_ibov_ret),
                          ' (', my_perc(ret_ibov_year), ' per year)\n',
-                         'Total real (without inflation) return is equivalent to ',
+                         'Total real (without inflation) arithmetic return is equivalent to ',
                          my_perc(real_ret_ibov), 
                          ' (', my_perc(real_ret_ibov_year), ' per year)'),
        x = '',
@@ -72,7 +73,7 @@ largest_tab <- df_prices %>%
 p2 <- ggplot(df_prices, 
              aes(x = ref.date, y = log_ret)) + 
   geom_line() + 
-  labs(title = paste0('Adjusted Daily Log Returns of ', series_name),
+  labs(title = paste0('Nominal Daily Log Returns of ', series_name),
        subtitle = paste0('Red circles represent the largest ', n_largest, 
                          ' absolute price variations in the sample'),
        x = '',
@@ -91,3 +92,9 @@ p <- plot_grid(p1, p2, nrow = 2, labels = 'AUTO')
 # show and save
 x11() ; p ; ggsave(paste0('figs/fig02_', series_name, '_prices_returns.png'), p)
 
+# build autocorrelagram
+p <- ggAcf(x = df_prices$log_ret, lag.max = 10) +
+  labs(title = paste0('Autocorrelation for the Log Returns of ', series_name)) +
+  theme_bw()
+
+x11()  ; p ; ggsave('figs/fig03_autocorrelation_logret.png')

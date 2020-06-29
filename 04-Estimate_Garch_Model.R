@@ -49,7 +49,7 @@ estimate_garch <- function(ar_lag,
                            distribution_to_estimate) {
   
   message('Estimating ARMA(',ar_lag,',', ma_lag, ')', '-',
-          models_to_estimate, '(', arch_lag, ',', garch_lag, ')', '-',
+          models_to_estimate, '(', arch_lag, ',', garch_lag, ') ', 
           'dist = ', distribution_to_estimate)
   
   # estimate model

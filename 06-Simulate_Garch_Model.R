@@ -77,7 +77,7 @@ p1 <- ggplot() +
 
 
 # plot graphics
-x11(); p1 ; ggsave(paste0('figs/fig04_', series_name, '_price_simulation.png'))
+x11(); p1 ; ggsave(paste0('figs/fig05_', series_name, '_price_simulation.png'))
 
 my_idx_date <- first(which(tab_prob$prob > 0.5))
 df_date <- tibble(idx = c(first(which(tab_prob$prob > 0.001)),
@@ -124,4 +124,4 @@ p2 <- ggplot(tab_prob, aes(x = ref_date, y = prob) ) +
                hjust = 0) + 
   theme_bw()
 
-x11(); p2 ; ggsave(paste0('figs/fig05_', series_name, '_prob_reaching_peak.png'))
+x11(); p2 ; ggsave(paste0('figs/fig06_', series_name, '_prob_reaching_peak.png'))
