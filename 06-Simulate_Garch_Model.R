@@ -16,7 +16,6 @@ n_days_ahead <- 15*365 # Number of days ahead to simulate (10*365 in paper)
 ## END OPTIONS
 
 library(tidyverse)
-library(fGarch)
 library(ggtext)
 
 graphics.off()
