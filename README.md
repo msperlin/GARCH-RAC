@@ -41,5 +41,5 @@ If you've found an issue within the code, please use [Git issue system](https://
 - [Windows 10](https://www.microsoft.com/pt-br/software-download/windows10ISO)
 - [Linux Mint 20](https://linuxmint.com/release.php?id=38)
 - [Ubuntu 20.04](https://ubuntu.com/download/desktop/thank-you?version=20.04&architecture=amd64)
-- [RStudio Cloud](https://rstudio.cloud/)
+- [RStudio Cloud](https://rstudio.cloud/project/1371589)
 
