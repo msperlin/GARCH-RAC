@@ -56,7 +56,7 @@ p1 <- ggplot(df_prices, aes(x = ref.date, y = price.adjusted)) +
        subtitle = paste0('Total nominal arithmetic return equals to ', 
                          my_perc(total_ibov_ret),
                          ' (', my_perc(ret_ibov_year), ' per year)\n',
-                         'Total real, adjusted for inflation, equals to ',
+                         'Total real return, adjusted for inflation, equals to ',
                          my_perc(real_ret_ibov), 
                          ' (', my_perc(real_ret_ibov_year), ' per year)'),
        x = '',

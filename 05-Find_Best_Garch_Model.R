@@ -84,7 +84,7 @@ p1 <- ggplot(df_long %>%
        subtitle = 'The best model is the one with lowest AIC or BIC (with star)',
        x = '',
        y = 'Value of Fitness Criteria',
-       shape = 'Type of Error Distribution',
+       shape = 'Type of Dist.',
        color = 'Type of Model') + 
   theme(legend.position = "right")
 
