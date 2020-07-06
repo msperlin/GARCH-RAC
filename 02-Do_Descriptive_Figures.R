@@ -56,13 +56,13 @@ p1 <- ggplot(df_prices, aes(x = ref.date, y = price.adjusted)) +
        subtitle = paste0('Total nominal arithmetic return equals to ', 
                          my_perc(total_ibov_ret),
                          ' (', my_perc(ret_ibov_year), ' per year)\n',
-                         'Total real (without inflation) arithmetic return is equivalent to ',
+                         'Total real, adjusted for inflation, equals to ',
                          my_perc(real_ret_ibov), 
                          ' (', my_perc(real_ret_ibov_year), ' per year)'),
        x = '',
        y = 'Index Value',
        caption = 'Data from Yahoo Finance') + 
-  theme_bw() 
+  theme_bw(base_family = "TT Times New Roman") 
 
 # calculate largest absolute price variations
 largest_tab <- df_prices %>%
@@ -77,9 +77,9 @@ p2 <- ggplot(df_prices,
        subtitle = paste0('Red circles represent the largest ', n_largest, 
                          ' absolute price variations in the sample'),
        x = '',
-       y = 'Ajusted Log Returns',
+       y = 'Log Returns',
        caption = 'Data from Yahoo Finance') + 
-  theme_bw() + 
+  theme_bw(base_family = "TT Times New Roman") + 
   geom_point(data = largest_tab, aes(x = ref.date, y = log_ret), 
              size = 3, color = 'red'  ) +
   scale_y_continuous(labels = scales::percent) + 
@@ -94,7 +94,7 @@ x11() ; p ; ggsave(paste0('figs/fig02_', series_name, '_prices_returns.png'), p)
 
 # build autocorrelagram
 p <- ggAcf(x = df_prices$log_ret, lag.max = 10) +
-  labs(title = paste0('Autocorrelation for the Log Returns of ', series_name)) +
-  theme_bw()
+  labs(title = paste0('Autocorrelogram for the Log Returns of ', series_name)) +
+  theme_bw(base_family = "TT Times New Roman")
 
 x11()  ; p ; ggsave('figs/fig03_autocorrelation_logret.png')

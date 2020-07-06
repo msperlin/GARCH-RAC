@@ -8,12 +8,14 @@
 
 max_lag <- 5
 my_html_file <- 'tabs/tab03-Arch_Test.html'
+my_xlsx_file <- 'tabs/tab03-Arch_Test.xlsx'
 
 ## END OPTIONS
 
 library(tidyverse)
 library(knitr)
 library(kableExtra)
+library(writexl)
 
 my_d <- dirname(rstudioapi::getActiveDocumentContext()$path)
 setwd(my_d)
@@ -47,3 +49,6 @@ my_tbl <- knitr::kable(tab_out, format = 'html' ) %>%
 my_tbl
 
 cat(my_tbl, file = my_html_file)  
+
+# write to excel
+write_xlsx(x = tab_out, path = my_xlsx_file)

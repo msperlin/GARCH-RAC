@@ -74,7 +74,8 @@ p1 <- ggplot(df_long %>%
                  color = type_model)) + 
   geom_point(size = 3.5, alpha = 0.65) + 
   coord_flip() + 
-  theme_bw() + facet_wrap(~name, scales = 'free_x') + 
+  theme_bw(base_family = "TT Times New Roman") + 
+  facet_wrap(~name, scales = 'free_x') + 
   geom_point(data = df_best_models, mapping = aes(x = reorder(model_name, 
                                                               order(type_model)),
                                                   y = value), 

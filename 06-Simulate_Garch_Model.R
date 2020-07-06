@@ -60,9 +60,9 @@ p1 <- ggplot() +
             color = 'grey', 
             size = 0.25,
             alpha = 0.015) + 
-  theme_bw() + 
+  theme_bw(base_family = "TT Times New Roman") + 
   geom_hline(yintercept = max(df_prices_temp$price.adjusted)) + 
-  labs(title = paste0('Projections of ', series_name),
+  labs(title = paste0('Price Projections of ', series_name),
        subtitle = paste0('Total of ', n_sim, ' simulations based on a ',
                          my_garch_name, 
                          ' model selected by BIC'),
@@ -94,8 +94,8 @@ df_textbox <- tibble(ref_date = df_date$ref_date[2],
                                     'the chances of asset **', series_name, '** to reach ',
                                     'its historical peak value of ', 
                                     format(max(df_prices$price.adjusted), 
-                                           big.mark = '.',
-                                           decimal.mark = ','),
+                                           big.mark = ',',
+                                           decimal.mark = '.'),
                                     ' are higher than 50% at ', format(ref_date, '%d/%m/%Y'), '.') )
 
 p2 <- ggplot(tab_prob, aes(x = ref_date, y = prob) ) + 
@@ -121,6 +121,6 @@ p2 <- ggplot(tab_prob, aes(x = ref_date, y = prob) ) +
                width = unit(0.5, "npc"),
                #fill = "cornsilk",
                hjust = 0) + 
-  theme_bw()
+  theme_bw(base_family = "TT Times New Roman")
 
 x11(); p2 ; ggsave(paste0('figs/fig06_', series_name, '_prob_reaching_peak.png'))
