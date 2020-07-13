@@ -85,7 +85,7 @@ df_date <- tibble(idx = c(first(which(tab_prob$prob > 0.001)),
                           first(which(tab_prob$prob > 0.95))),
                   ref_date = tab_prob$ref_date[idx],
                   prob = tab_prob$prob[idx],
-                  my_text = paste0(format(ref_date, '%d/%m/%Y'),
+                  my_text = paste0(format(ref_date, '%m/%d/%Y'),
                                    '\nprob = ', scales::percent(prob) ) )
 
 df_textbox <- tibble(ref_date = df_date$ref_date[2],
@@ -96,7 +96,7 @@ df_textbox <- tibble(ref_date = df_date$ref_date[2],
                                     format(max(df_prices$price.adjusted), 
                                            big.mark = ',',
                                            decimal.mark = '.'),
-                                    ' are higher than 50% at ', format(ref_date, '%d/%m/%Y'), '.') )
+                                    ' are higher than 50% at ', format(ref_date, '%m/%d/%Y'), '.') )
 
 p2 <- ggplot(tab_prob, aes(x = ref_date, y = prob) ) + 
   geom_line(size = 2) + 
