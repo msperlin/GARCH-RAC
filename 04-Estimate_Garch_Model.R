@@ -10,7 +10,7 @@ ma_lag <- 0 # lag used for ma term in mean equation (0 in paper)
 arch_lag <- 1 # lag in arch effect (1 in paper)
 garch_lag <- 1 # lag in garch effect (1 in paper)
 models_to_estimate <- c('sGARCH', 'eGARCH', 'gjrGARCH') # see rugarch manual for more
-distribution_to_estimate <- 'snorm' # distribution used in all models
+distribution_to_estimate <- 'norm' # distribution used in all models
 my_html_file <- 'tabs/tab04-estimation_garch.html' # where to save html file?
 
 # END OPTIONS
