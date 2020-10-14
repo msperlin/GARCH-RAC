@@ -1,5 +1,5 @@
 # A Garch Tutorial with R - Simulation of prices
-# Paper at <link_paper_here>
+# Paper at <https://rac.anpad.org.br/index.php/rac/article/view/1420>
 # 
 # This script will use the best garch model from previous script and simulate
 # many return series into the future. After the simulations, the code calculates 

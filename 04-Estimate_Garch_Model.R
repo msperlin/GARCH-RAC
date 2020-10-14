@@ -1,5 +1,5 @@
 # A Garch Tutorial with R - Estimate simple garch model
-# Paper at <link_paper_here>
+# Paper at <https://rac.anpad.org.br/index.php/rac/article/view/1420>
 #
 # This script will estimate a simple garch model, with three different distributions,
 # and save estimation results in a .html file

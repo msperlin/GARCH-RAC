@@ -1,11 +1,10 @@
 # A Garch Tutorial with R - Create Descriptive Figure
-# Paper at <link_paper_here>
+# Paper at <https://rac.anpad.org.br/index.php/rac/article/view/1420>
 #
 # This script will use the financial data from previous script and, additionally, 
 # import inflation data from the Brazilian Central Bank Database
 # <https://www3.bcb.gov.br/sgspub/localizarseries/localizarSeries.do?method=prepararTelaLocalizarSeries> 
 # , producing Figure 01 at the end of its execution
-
 
 # OPTIONS
 n_largest <- 10 # number of largest absolute returns to plot
@@ -13,8 +12,8 @@ n_largest <- 10 # number of largest absolute returns to plot
 # END OPTIONS
 
 # load libraries
-library(tidyverse)
 library(cowplot)
+library(tidyverse)
 library(GetBCBData)
 library(forecast)
 
@@ -79,18 +78,26 @@ p2 <- ggplot(df_prices,
        x = '',
        y = 'Log Returns',
        caption = 'Data from Yahoo Finance') + 
-  theme_bw(base_family = "TT Times New Roman") + 
+  theme_bw(base_family = "TT Times New Roman") +
   geom_point(data = largest_tab, aes(x = ref.date, y = log_ret), 
              size = 3, color = 'red'  ) +
   scale_y_continuous(labels = scales::percent) + 
-  labs(size = 'Absolute Price Variation') + 
+  labs(size = 'Absolute Price Variation') # + 
   scale_color_brewer(palette = 'BrBG')
 
 # bind plots together
-p <- plot_grid(p1, p2, nrow = 2, labels = 'AUTO')
+p <- plot_grid(p1, p2, nrow = 2, 
+               labels = 'AUTO')
 
 # show and save
-x11() ; p ; ggsave(paste0('figs/fig02_', series_name, '_prices_returns.png'), p)
+# ERROR in old Code: invalid 'bg' value
+#x11() ; p ; ggsave(filename = paste0('figs/fig02_', series_name, '_prices_returns.png'), 
+ #                  plot = p) 
+
+x11() ; p1 ; ggsave(filename = paste0('figs/fig02a_', series_name, '_prices.png'), 
+                   plot = p1)
+x11() ; p2 ; ggsave(filename = paste0('figs/fig02b_', series_name, '_returns.png'), 
+                    plot = p2)
 
 # build autocorrelagram
 p <- ggAcf(x = df_prices$log_ret, lag.max = 10) +

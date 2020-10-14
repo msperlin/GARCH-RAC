@@ -1,5 +1,5 @@
 # A Garch Tutorial with R - R Script for Preparing Computer
-# Paper at <link_paper_here>
+# Paper at <https://rac.anpad.org.br/index.php/rac/article/view/1420>
 #
 # This script will install all missing dependencies for the R code related to article
 # "A Garch Tutorial in R" <link-to-paper>. If this is the first time running a R script, 

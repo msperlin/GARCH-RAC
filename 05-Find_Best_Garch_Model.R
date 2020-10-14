@@ -1,5 +1,5 @@
 # A Garch Tutorial with R - Finding the best model 
-# Paper at <link_paper_here>
+# Paper at <https://rac.anpad.org.br/index.php/rac/article/view/1420>
 #
 # This script will estimate several garch models and find the best using the BIC
 # criteria. A plot with the results, Figure 02 in the paper, is saved in a .png file
@@ -10,7 +10,7 @@
 max_lag_AR <- 1 # used 1 in paper
 max_lag_MA <- 1 # used 1 in paper
 max_lag_ARCH <- 2 # used 2 in paper
-max_lag_GARCH <- 1 # used 2 in paper
+max_lag_GARCH <- 1 # used 1 in paper
 dist_to_use <- c('norm', 'std') # see rugarch::ugarchspec help for more
 models_to_estimate <- c('sGARCH', 'eGARCH', 'gjrGARCH') # see rugarch::rugarchspec help for more
 

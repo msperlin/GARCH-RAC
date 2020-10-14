@@ -1,6 +1,6 @@
 # GARCH-RAC
 
-This is the repository for R code associated with the paper "Garch Tutorial in R", submitted to RAC in march 2020. The full paper is available at [RAC](link_to_paper). 
+This is the repository for R code associated with the paper "Garch Tutorial in R", submitted to RAC in march 2020. The full paper is available at [RAC](https://rac.anpad.org.br/index.php/rac/article/view/1420). 
 
 ## Available R scripts
 

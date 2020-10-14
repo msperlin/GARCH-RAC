@@ -1,5 +1,5 @@
 # A Garch Tutorial with R - Perform ARCH test in series of returns
-# Paper at <link_paper_here>
+# Paper at <https://rac.anpad.org.br/index.php/rac/article/view/1420>
 #
 # This script will test for arch effects for a given vector of returns, given
 # lags and save results in .html file.

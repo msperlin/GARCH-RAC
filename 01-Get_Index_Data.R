@@ -1,5 +1,5 @@
 # A Garch Tutorial with R - Get Index data from Yahoo Finance
-# Paper at <link_paper_here>
+# Paper at <https://rac.anpad.org.br/index.php/rac/article/view/1420>
 #
 # This script will import price data for market index Ibovespa (or any other) from Yahoo Finance.
 # 
